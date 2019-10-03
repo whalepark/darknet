@@ -1,8 +1,15 @@
 #!/bin/bash
 
 function run_model {
+trap "echo SIGINT is issued." SIGINT
+trap "echo SIGTERM is issued." SIGTERM
+trap "echo SIGHUP is issued." SIGHUP
+trap "echo SIGQUIT is issued." SIGQUIT
+trap "echo SIGTTIN is issued." SIGTTIN
+
+
    # elapsed_time=$(nohup ./darknet detect cfg/yolov3.cfg yolov3.weights data/dog.jpg < /dev/null 2> /dev/null | grep seconds)
-    elapsed_time=$(nohup ./darknet detect cfg/yolov3.cfg yolov3.weights data/dog.jpg < /dev/null | grep seconds)
+     elapsed_time=$(./darknet detect cfg/yolov3.cfg yolov3.weights data/dog.jpg < /dev/null | grep seconds)
     FS=' ' read -r -a array <<< $elapsed_time
     log=$1','$2','${array[3]}
     echo $log
@@ -39,3 +46,4 @@ for i in 1 2 4 8 16; do
         wait
     done
 done
+
