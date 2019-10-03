@@ -1,4 +1,3 @@
-  GNU nano 2.9.3                                                                                      exp.sh                                                                                                
 
 #!/bin/bash
 
